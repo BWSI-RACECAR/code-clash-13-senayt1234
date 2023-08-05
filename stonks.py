@@ -39,36 +39,19 @@ Total profit = 4 + 8 = 12.
 
 class Solution:
     def stonks(self, prices):
-            #type prices: list of int
-            #return type: int
-            
-            #TODO: Write code below to returnn an int with the solution to the prompt.
-            profit = 0
-            index = 0
-            r = 0
-            great = 0
-            start = 0
-            star = 0
-            grea = 0
-            while len(prices)-1>index:
-                 if prices[index+1]>prices[index]:
-                      r = r+1
-                 if r == 1:
-                      start = prices[index]
-                      great = prices[index+1]
-                      star = index
-                      grea = index+1
-                 index = index+1
-            if r == 0:
-                 return r 
-            while len(prices)>star:
-                 if prices[star]>great:
-                      great = prices[star]
-                      grea = star
-                 star = star+1
-            
-            
-            return (great - start)
+        if not prices or len(prices) < 2:
+            return 0
+        first_buy = float('inf')
+        second_buy = float('inf')
+        first_profit = 0
+        second_profit = 0
+        for price in prices:
+            first_buy = min(first_buy, price)
+            first_profit = max(first_profit, price - first_buy)
+            second_buy = min(second_buy, price - first_profit)
+            second_profit = max(second_profit, price - second_buy)
+        return second_profit
+        pass
 
 def main():
     array = input().split(" ")
